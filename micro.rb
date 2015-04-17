@@ -60,12 +60,16 @@ get %r{/file/(.*)} do |filename|
 end
 
 post "/file/:filename" do
-    File.write(params[:filename], request.body.read)
+    halt 403 if params[:filename].include? ".."
+    File.write(params[:filename], params[:data]).to_s
 end
 
 __END__
 
 @@index
+.search-container
+	%input.search
+	.search-results
 %textarea.edit-area{data: {filename: "intro"}}
 
 @@edit
@@ -141,6 +145,8 @@ options =
     lineNumbers: true
     foldGutter: true
     gutters: ["CodeMirror-foldgutter", "CodeMirror-linenumbers"]
+	electricChars: false
+	smartIndent: false
 # check if we should be displaying a file
 filename = $(edit_area).data 'filename'
 # if we are
@@ -192,25 +198,35 @@ $('.search').on 'keydown', (e) ->
 saveFile = (filename) ->
     if !filename
         filename = window.location.pathname.match(/\/edit\/(.*)$/)[1]
-    file_contents = window.editor.getValue()
+    file_contents = window.editor.getValue().replace(/(\r\n|\r)/gm, "\n")
     save_url = '/file/'+filename
-    $.post(save_url, file_contents).then (event) ->
+    data = new FormData()
+    data.append('data', file_contents)
+    options = {
+        type: 'POST',
+        url: save_url,
+        data: data,
+        processData: false,
+        contentType: false,
+    }
+    $.ajax(options).done (data) ->
         alert('file saved')
 
 # then, setup save
 $(window).bind 'keydown', (event) ->
-  if event.ctrlKey or event.metaKey
-    switch String.fromCharCode(event.which).toLowerCase()
-      when 's'
+    if event.which==8
         event.preventDefault()
-        alert 'ctrl-s'
-        saveFile()
-      when 'f'
-        event.preventDefault()
-        alert 'ctrl-f'
-      when 'g'
-        event.preventDefault()
-        alert 'ctrl-g'
+    if event.ctrlKey or event.metaKey
+        switch String.fromCharCode(event.which).toLowerCase()
+            when 's'
+                event.preventDefault()
+                saveFile()
+            #when 'f'
+            #   event.preventDefault()
+            #   alert 'ctrl-f'
+            when 'g'
+                event.preventDefault()
+                alert 'ctrl-g'
 
 @@intro
 In-Browser Editor v0.1 - a single file in-browser IDE
@@ -222,7 +238,6 @@ Description:
     the ruby file and run within a directory you
     want to serve. Great for Chromebook web devs.
 Todo:
-    - Saving
     - Pressing 'CTRL' brings up image with hotkeys
     - Pressing 'CTRL-m' or something lets you 
       remap hotkeys
