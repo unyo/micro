@@ -91,29 +91,35 @@ __END__
     %head
         %title
             In-browser Editor
-        %link{rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.12.0/codemirror.css"}
-        %link{rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.12.0/theme/zenburn.css"}
-        %link{rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.12.0/addon/fold/foldgutter.css"}
+        %link{rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/codemirror.css"}
+        %link{rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/theme/zenburn.css"}
+        %link{rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/addon/fold/foldgutter.css"}
+        %link{rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/addon/dialog/dialog.css"}
         %link{rel: "stylesheet", href: "/style.css"}
     %body
         = yield
-    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.12.0/codemirror.js"}
-    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.12.0/mode/xml/xml.js"}
-    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.12.0/mode/css/css.js"}
-    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.12.0/mode/javascript/javascript.js"}
-    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.12.0/mode/ruby/ruby.js"}
-    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.12.0/mode/python/python.js"}
-    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.12.0/mode/htmlmixed/htmlmixed.js"}
-    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.12.0/mode/sass/sass.js"}
-    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.12.0/mode/coffeescript/coffeescript.js"}
-    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.12.0/mode/haml/haml.js"}
-    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.12.0/addon/runmode/colorize.js"}
-    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.12.0/addon/fold/foldcode.js"}
-    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.12.0/addon/fold/foldgutter.js"}
-    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.12.0/addon/fold/indent-fold.js"}
-    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.12.0/addon/fold/xml-fold.js"}
-    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.12.0/addon/fold/brace-fold.js"}
-    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.12.0/addon/fold/comment-fold.js"}
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/codemirror.js"}
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/mode/xml/xml.js"}
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/mode/css/css.js"}
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/mode/javascript/javascript.js"}
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/mode/ruby/ruby.js"}
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/mode/python/python.js"}
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/mode/htmlmixed/htmlmixed.js"}
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/mode/sass/sass.js"}
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/mode/coffeescript/coffeescript.js"}
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/mode/haml/haml.js"}
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/addon/runmode/colorize.js"}
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/addon/fold/foldcode.js"}
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/addon/fold/foldgutter.js"}
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/addon/fold/indent-fold.js"}
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/addon/fold/xml-fold.js"}
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/addon/fold/brace-fold.js"}
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/addon/fold/comment-fold.js"}
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/addon/dialog/dialog.js"}
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/addon/search/search.js"}
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/addon/search/searchcursor.js"}
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/addon/search/searchcursor.js"}
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/addon/search/match-highlighter.js"}
     %script{src: "https://code.jquery.com/jquery-2.1.3.js"}
     %script{src: "/editor.js"}
 
