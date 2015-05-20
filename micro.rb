@@ -60,11 +60,14 @@ get %r{/file/(.*)} do |filename|
 end
 
 post %r{/file/(.*)} do |filename|
-    halt 403 if filename.include? ".."
-    data = params[:data]
-    data.gsub!(/\r/, '')
-    p data
-    File.write(filename, data).to_s
+    halt 403 if (!filename or filename.include?(".."))
+    halt 500 if (!params[:file] or !params[:file][:tempfile])
+    read = File.open(params[:file][:tempfile], 'rb')
+    write = File.open(filename, 'wb')
+    bytes = IO.copy_stream(read, write)
+    read.close()
+    write.close()
+    return bytes.to_s
 end
 
 __END__
@@ -202,9 +205,10 @@ saveFile = (filename) ->
     if !filename
         filename = window.location.pathname.match(/\/edit\/(.*)$/)[1]
     file_contents = window.editor.getValue()
+    file_as_blob = new Blob([file_contents], {type:'text/plain'})
     save_url = '/file/'+filename
     data = new FormData()
-    data.append('data', file_contents)
+    data.append('file', file_as_blob)
     options = {
         type: 'POST',
         url: save_url,
