@@ -62,11 +62,12 @@ end
 post %r{/file/(.*)} do |filename|
     halt 403 if (!filename or filename.include?(".."))
     halt 500 if (!params[:file] or !params[:file][:tempfile])
-    read = File.open(params[:file][:tempfile], 'rb')
-    write = File.open(filename, 'wb')
-    bytes = IO.copy_stream(read, write)
-    read.close()
-    write.close()
+    bytes = 0
+    File.open(params[:file][:tempfile], 'rb') do |read|
+        File.open(filename, 'wb') do |write|
+            bytes = IO.copy_stream(read, write)
+        end
+    end
     return bytes.to_s
 end
 
