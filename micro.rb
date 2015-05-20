@@ -175,7 +175,7 @@ if filename
         options.mode = "javascript"
     if filename.indexOf('.css') > 0
         options.mode = 'css'
-    if filename.indexOf('.sass') > 0
+    if filename.indexOf('.sass') > 0 or filename.indexOf('.scss') > 0
         options.mode = 'sass'
     if filename.indexOf('haml') > 0
         options.mode = 'haml'
