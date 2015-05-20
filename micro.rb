@@ -61,7 +61,10 @@ end
 
 post %r{/file/(.*)} do |filename|
     halt 403 if filename.include? ".."
-    File.write(filename, params[:data]).to_s
+    data = params[:data]
+    data.gsub!(/\r/, '')
+    p data
+    File.write(filename, data).to_s
 end
 
 __END__
@@ -198,7 +201,7 @@ $('.search').on 'keydown', (e) ->
 saveFile = (filename) ->
     if !filename
         filename = window.location.pathname.match(/\/edit\/(.*)$/)[1]
-    file_contents = window.editor.getValue().replace(/(\r\n|\r)/gm, "\n")
+    file_contents = window.editor.getValue()
     save_url = '/file/'+filename
     data = new FormData()
     data.append('data', file_contents)
