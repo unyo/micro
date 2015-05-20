@@ -163,11 +163,11 @@ if filename
     if filename.indexOf('.css') > 0
         options.mode = 'css'
     if filename.indexOf('.sass') > 0
-        option.mode = 'sass'
+        options.mode = 'sass'
     if filename.indexOf('haml') > 0
-        option.mode = 'haml'
+        options.mode = 'haml'
     if filename.indexOf('xml') > 0
-        option.mode = 'xml'
+        options.mode = 'xml'
     # read in the file
     read_path = '/file/'+filename
     $.get read_path, (result) ->
