@@ -59,9 +59,9 @@ get %r{/file/(.*)} do |filename|
     end
 end
 
-post "/file/:filename" do
-    halt 403 if params[:filename].include? ".."
-    File.write(params[:filename], params[:data]).to_s
+post %r{/file/(.*)} do |filename|
+    halt 403 if filename.include? ".."
+    File.write(filename, params[:data]).to_s
 end
 
 __END__
